@@ -15,9 +15,13 @@ public class Control : MonoBehaviour {
 
 	public GameObject panelFinalGO;
 
+	public GameObject powerUpGO;
+
 	float tiempo = 0f;
 	float respawn = 5f;
 	float tiempoTotal = -5f;
+	float controladorTiempoPowerUp = 0f;
+	int tiempoPowerUp;
 	public int seg = 0;
 
 	bool nuevoLanzador = true;
@@ -34,6 +38,9 @@ public class Control : MonoBehaviour {
 		txtTiempo.text = "0";
 		//panelFinalGO.SetActive (false);
 		escogerLanzador();
+
+		tiempoPowerUp = 5;
+		//tiempoPowerUp = Random.Range(15, 45);
 	}
 	
 	// Update is called once per frame
@@ -41,11 +48,17 @@ public class Control : MonoBehaviour {
 		if((estadoJuego == 1) && (Playerscript.muerto == 0)){
 			cronometro ();
 			tiempo += Time.deltaTime;
+			controladorTiempoPowerUp += Time.deltaTime;
 			if(nuevoLanzador == true){
 				escogerLanzador ();
 			}
 			if(tiempo >= respawn){
 				lanzarRoca ();
+			}
+
+			if(controladorTiempoPowerUp >= tiempoPowerUp){
+				
+				lanzarPowerUp ();
 			}
 		}
 
@@ -69,10 +82,6 @@ public class Control : MonoBehaviour {
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 		foreach(GameObject enemy in enemies)
 			GameObject.Destroy(enemy);
-	}
-
-	void crearPlayer(){
-		GameObject Player = Instantiate (playerGO, transform.position, transform.rotation) as GameObject; 
 	}
 
 	void reiniciar(){
@@ -106,5 +115,12 @@ public class Control : MonoBehaviour {
 
 		seg = (int)tiempoTotal % 60;
 		txtTiempo.text = seg.ToString ();
+	}
+
+	void lanzarPowerUp(){
+		controladorTiempoPowerUp = 0f;
+		tiempoPowerUp = Random.Range(15, 45);
+		Vector3 posicion = new Vector3 (Random.Range (-8.0f, 8.0f), Random.Range (-4.0f, 4.0f), 0);
+		Instantiate (powerUpGO, posicion, Quaternion.identity);
 	}
 }
