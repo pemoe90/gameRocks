@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class eliminarEnemigos : MonoBehaviour {
+public class eliminarEnemigosPU : MonoBehaviour {
 
 	public GameObject controladorGO;
 	public ControladorRocas controladorScript;
