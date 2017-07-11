@@ -12,18 +12,13 @@ public class eliminarEnemigosPU : MonoBehaviour {
 		controladorGO = GameObject.Find ("Controlador");
 		controladorScript = controladorGO.GetComponent<ControladorRocas> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	void OnCollisionEnter2D(Collision2D col){
-		Debug.Log ("Colision");
 		Destroy (gameObject);
 		eliminar ();
 	}
 
+	//funcion eliminar mitad de enemigos
 	void eliminar (){
 		int cont = 0;
 		int size = controladorScript.goList.Count / 2;
