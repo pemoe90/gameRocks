@@ -7,11 +7,15 @@ public class Player : MonoBehaviour {
 	public float velocidad = 10.0f;
 	public float espacio = 0.6f;
 
-	public int muerto = 0; // está vivo
+	public bool vivo = true; // 0 está vivo
 	public Vector3 pos;
+
+	float tiempoInvulnerable = 5f; // tiempo que esta invulnerable
+
+	private CircleCollider2D playerCollider;
 	// Use this for initialization
 	void Start () {
-		
+		playerCollider = gameObject.GetComponent<CircleCollider2D>();
 	}
 	
 	// Update is called once per frame
@@ -21,7 +25,7 @@ public class Player : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D objeto){
 		if (objeto.gameObject.tag == "Enemy") {
-			muerto = 1;
+			vivo = false;
 		}
 	}
 
@@ -54,7 +58,33 @@ public class Player : MonoBehaviour {
 
 		transform.position = pos;
 	}
+	/*
+	public void invulnerabilidad(){
+		controladorTiempoInvulnerable = 0f;
+		playerCollider.isTrigger = true;
 
+		while(controladorTiempoInvulnerable < tiempoInvulnerable){
+			controladorTiempoInvulnerable += Time.deltaTime;
 
+		}
 
+		if(controladorTiempoInvulnerable >= tiempoInvulnerable){
+			Debug.Log (controladorTiempoInvulnerable);
+			playerCollider.isTrigger = false;
+		}
+
+	}
+	*/
+
+	public void empezarInvulnerabilidad(){
+		StartCoroutine (invulnerabilidad ());	
+	}
+
+	public IEnumerator invulnerabilidad (){
+		Debug.Log ("Hecho");
+		gameObject.layer = 9;
+		yield return new WaitForSeconds (tiempoInvulnerable);
+		Debug.Log ("TErminado");
+		gameObject.layer = 8;
+	}
 }

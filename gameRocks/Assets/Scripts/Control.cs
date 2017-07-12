@@ -45,7 +45,7 @@ public class Control : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if((estadoJuego) && (Playerscript.muerto == 0)){
+		if((estadoJuego) && (Playerscript.vivo)){
 			nuevoPowerUp = true;
 			funcionamiento = true;
 			cronometro ();
@@ -61,7 +61,7 @@ public class Control : MonoBehaviour {
 
 		}
 
-		if(Playerscript.muerto == 1){
+		if(Playerscript.vivo == false){
 			nuevoPowerUp = false;
 			funcionamiento = false;
 			reiniciar ();
@@ -105,7 +105,7 @@ public class Control : MonoBehaviour {
 
 	void escogerLanzador(){
 		nuevoLanzador = false;
-		int select = Random.Range (0, 4);
+		int select = Random.Range (0, lanzadores.Length);
 		lanzadorGO = lanzadores [select];
 		lanzadorScript = lanzadorGO.GetComponent<LanzarRoca> ();
 		lanzadorGO.SetActive (true);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CambioTamañoPU : MonoBehaviour {
 
-	Vector3 scale;
+	public Enemy EnemyScript;
 	// Use this for initialization
 	void Start () {
 		
@@ -22,12 +22,19 @@ public class CambioTamañoPU : MonoBehaviour {
 
 	//cambio el tamaño de los enemigos a la mitad
 	void cambioTam(){
+		Vector3 scale;
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 		foreach(GameObject enemy in enemies){
-			scale = enemy.transform.localScale;
-			scale.x = scale.x / 2;
-			scale.y = scale.y / 2;
-			enemy.transform.localScale = scale;
+			EnemyScript = enemy.GetComponent<Enemy>();
+			if(EnemyScript.getCambioTam() == true){
+				scale = enemy.transform.localScale;
+				scale.x = scale.x / 2;
+				scale.y = scale.y / 2;
+				enemy.transform.localScale = scale;
+				bool x = false;
+				EnemyScript.setCambioTam(x);
+			}
+
 		}
 	}
 }

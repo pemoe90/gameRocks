@@ -38,7 +38,7 @@ public class ControlPowerUps : MonoBehaviour {
 		//tiempoPowerUp = Random.Range(15, 45);
 		tiempoPowerUp = 4;
 		Vector3 posicion = new Vector3 (Random.Range (-7.0f, 7.0f), Random.Range (-4.0f, 4.0f), 0);
-		int select = Random.Range (0, 1000) % 3;
+		int select = Random.Range (0, tipos.Length);
 		powerUpGO = tipos [select];
 		Instantiate (powerUpGO, posicion, Quaternion.identity);
 	}

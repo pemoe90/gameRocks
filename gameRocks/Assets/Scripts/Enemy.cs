@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
 	public Vector2 direction = new Vector2(-1, 1);
 	public float espacio = 0.6f;
 
+	bool cambiotam = true; //variable para controlar si se le puede cambiar la escala o no
 	private Vector2 movement;
 	private Rigidbody2D rigidbodyComponent;
 
@@ -27,7 +28,15 @@ public class Enemy : MonoBehaviour {
 		if (rigidbodyComponent == null) rigidbodyComponent = GetComponent<Rigidbody2D>();
 		rigidbodyComponent.velocity = movement;
 	}
-		
+
+
+	public bool getCambioTam(){
+		return cambiotam;
+	}
+
+	public void setCambioTam(bool x){
+		cambiotam = x;
+	} 
 	void cambioVelocidad(){
 		
 		int random = Random.Range(5,10);
