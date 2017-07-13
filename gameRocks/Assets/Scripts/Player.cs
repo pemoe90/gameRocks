@@ -8,14 +8,14 @@ public class Player : MonoBehaviour {
 	public float espacio = 0.6f;
 
 	public bool vivo = true; // 0 está vivo
-	public Vector3 pos;
+	private Vector3 pos;
 
 	float tiempoInvulnerable = 5f; // tiempo que esta invulnerable
 
-	private CircleCollider2D playerCollider;
+	private SpriteRenderer playerRender;
 	// Use this for initialization
 	void Start () {
-		playerCollider = gameObject.GetComponent<CircleCollider2D>();
+		playerRender = gameObject.GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -81,10 +81,10 @@ public class Player : MonoBehaviour {
 	}
 
 	public IEnumerator invulnerabilidad (){
-		Debug.Log ("Hecho");
 		gameObject.layer = 9;
+		playerRender.color = new Color (0, 255, 0);
 		yield return new WaitForSeconds (tiempoInvulnerable);
-		Debug.Log ("TErminado");
 		gameObject.layer = 8;
+		playerRender.color = new Color (255, 0, 0);
 	}
 }
